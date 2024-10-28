@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <form>
-      <p>Weather App</p>
+      <p>🌤Weather App☀️</p>
       <input type="search" placeholder="Type a city..." />
       <input type="submit" value="Search" />
       <p>
