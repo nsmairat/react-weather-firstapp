@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ haveAxiosData: false });
@@ -13,7 +14,7 @@ export default function Weather(props) {
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
       iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-      date: "Wednesday 7:00",
+      date: new Date(response.data.time * 1000),
       haveAxiosData: true,
     });
   }
@@ -27,7 +28,7 @@ export default function Weather(props) {
                 type="search"
                 placeholder="Type a city..."
                 className="form-control"
-                oautoFocus="on"
+                autofocus="on"
               />
             </div>
             <div className="col-3">
@@ -41,7 +42,9 @@ export default function Weather(props) {
         </form>
         <h1>{weatherData.city}</h1>
         <ul>
-          <li>{weatherData.date}</li>
+          <li>
+            <FormattedDate date={weatherData.date} />
+          </li>
           <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
